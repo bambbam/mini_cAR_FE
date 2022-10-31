@@ -1,8 +1,13 @@
 import React from "react";
+import { Api } from "../App";
 import Header from "../component/header";
 import Square from "../component/square";
 
-const MainPage = () => {
+interface MainPageProps {
+    api: Api;
+}
+
+const MainPage = ({ api }: MainPageProps) => {
     const mainPageFlexStyle = {
         display: "flex",
         justifyContent: "space-evenly",
