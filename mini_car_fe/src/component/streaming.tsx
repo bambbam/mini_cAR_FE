@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Api } from "../App";
 
 interface StreamingProps {
-    api: Api;
+    url: string;
 }
 
-const Streaming = ({ api }: StreamingProps) => {
-    return <img src={api.videoApi.get_stream_video_url()}></img>;
+const Streaming = ({ url }: StreamingProps) => {
+    return <img src={url}></img>;
 };
 
 export default Streaming;

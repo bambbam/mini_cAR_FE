@@ -11,7 +11,7 @@ const StreamPage = ({ api }: StreamingPageProps) => {
     return (
         <>
             <Header />
-            <Streaming api={api} />;
+            <Streaming url={api.videoApi.get_stream_video_url()} />;
         </>
     );
 };

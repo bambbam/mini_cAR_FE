@@ -8,10 +8,23 @@ const Header = () => {
     const navigate = useNavigate();
     return (
         <nav className="navbar">
-            <div className="navbar__logo">mini-cAR</div>
+            <Button
+                onClick={() => {
+                    navigate("/");
+                }}
+                className="navbar__logo"
+            >
+                mini-cAR
+            </Button>
             <div>
                 <Button onClick={() => {}}>gallery</Button>
-                <Button onClick={() => {}}>streaming</Button>
+                <Button
+                    onClick={() => {
+                        navigate("/stream");
+                    }}
+                >
+                    streaming
+                </Button>
                 <Button onClick={() => {}}>login</Button>
             </div>
         </nav>
