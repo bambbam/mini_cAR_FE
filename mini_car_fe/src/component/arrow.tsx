@@ -14,13 +14,13 @@ interface ArrowProps {
 
 const Arrow = (prop: ArrowProps) => {
     return (
-        <div>
-            <div>
+        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
                 <Square bgcolor="black" fntcolor="white" onClick={prop.forward_func}>
                     앞으로
                 </Square>
             </div>
-            <div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
                 <Square bgcolor="black" fntcolor="white" onClick={prop.left_func}>
                     왼쪽
                 </Square>
@@ -31,19 +31,22 @@ const Arrow = (prop: ArrowProps) => {
                     오른쪽
                 </Square>
             </div>
-            <Square bgcolor="black" fntcolor="white" onClick={prop.stop_func}>
-                멈춤
-            </Square>
-            <Square bgcolor="black" fntcolor="white" onClick={prop.beep_func}>
-                경적
-            </Square>
 
-            <Square bgcolor="black" fntcolor="white" onClick={prop.speedup_func}>
-                속도 증가
-            </Square>
-            <Square bgcolor="black" fntcolor="white" onClick={prop.speeddown_func}>
-                속도 감소
-            </Square>
+            <div>
+                <Square bgcolor="black" fntcolor="white" onClick={prop.stop_func}>
+                    멈춤
+                </Square>
+                <Square bgcolor="black" fntcolor="white" onClick={prop.beep_func}>
+                    경적
+                </Square>
+
+                <Square bgcolor="black" fntcolor="white" onClick={prop.speedup_func}>
+                    속도 증가
+                </Square>
+                <Square bgcolor="black" fntcolor="white" onClick={prop.speeddown_func}>
+                    속도 감소
+                </Square>
+            </div>
         </div>
     );
 };
