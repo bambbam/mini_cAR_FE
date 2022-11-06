@@ -5,7 +5,7 @@ class VideoApi {
     prefix: string;
     constructor(client: AxiosInstance) {
         this.client = client;
-        this.prefix = "/streams";
+        this.prefix = "/stream";
     }
     get_stream_video_url() {
         return this.client.getUri() + this.prefix;

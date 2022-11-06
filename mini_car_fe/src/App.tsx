@@ -6,9 +6,11 @@ import MainPage from "./page/mainPage";
 import VideoApi from "./api/videoApi";
 import client from "./api/base";
 import StreamPage from "./page/streamPage";
+import CarApi from "./api/carApi";
 
 const get_apis = () => ({
     videoApi: new VideoApi(client),
+    carApi: new CarApi(client),
 });
 export type Api = ReturnType<typeof get_apis>;
 
