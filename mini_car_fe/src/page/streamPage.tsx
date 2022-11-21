@@ -7,17 +7,19 @@ import Streaming from "../component/streaming";
 
 interface StreamingPageProps {
     api: Api;
+    user: string | null;
+    setUser: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const StreamPage = ({ api }: StreamingPageProps) => {
+const StreamPage = ({ api, user, setUser }: StreamingPageProps) => {
     const movement_func = useCallback(async (dir: Movement) => {
         await api.carApi.move(dir);
     }, []);
 
     return (
         <>
-            <Header />
-            <Streaming url={api.videoApi.get_stream_video_url()} />;
+            <Header user={user} />
+            <Streaming api={api} user={user} />;
             <Arrow
                 forward_func={() => {
                     movement_func(Movement.forward);

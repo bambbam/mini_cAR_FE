@@ -5,9 +5,11 @@ import Square from "../component/square";
 
 interface MainPageProps {
     api: Api;
+    user: string | null;
+    setUser: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const MainPage = ({ api }: MainPageProps) => {
+const MainPage = ({ api, user, setUser }: MainPageProps) => {
     const mainPageFlexStyle = {
         display: "flex",
         justifyContent: "space-evenly",
@@ -18,7 +20,7 @@ const MainPage = ({ api }: MainPageProps) => {
 
     return (
         <>
-            <Header />
+            <Header user={user} />
             <div style={mainPageFlexStyle}>
                 <Square bgcolor="black" fntcolor="white">
                     로그인이 필요합니다

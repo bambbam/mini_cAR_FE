@@ -1,28 +1,45 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./page/mainPage";
 import VideoApi from "./api/videoApi";
-import client from "./api/base";
+import client, { setAuthorizationToken } from "./api/base";
 import StreamPage from "./page/streamPage";
 import CarApi from "./api/carApi";
+import UserApi from "./api/userApi";
+import LoginPage from "./page/loginPage";
 
 const get_apis = () => ({
     videoApi: new VideoApi(client),
     carApi: new CarApi(client),
+    userApi: new UserApi(client),
 });
 export type Api = ReturnType<typeof get_apis>;
 
 function App() {
     const Apis = useMemo(() => get_apis(), []);
-
+    const [user, setUser] = useState<string | null>(null);
+    useEffect(() => {
+        async function f() {
+            try {
+                const access_token = localStorage.getItem("access_token");
+                setAuthorizationToken(access_token);
+                const ret = await Apis.userApi.read_root();
+                setUser(ret.data.user);
+            } catch {
+                setUser(null);
+            }
+        }
+        f();
+    }, [Apis.userApi]);
     return (
         <div className="App">
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<MainPage api={Apis} />} />
-                    <Route path="/stream" element={<StreamPage api={Apis} />} />
+                    <Route path="/" element={<MainPage api={Apis} user={user} setUser={setUser} />} />
+                    <Route path="/stream" element={<StreamPage api={Apis} user={user} setUser={setUser} />} />
+                    <Route path="/login" element={<LoginPage api={Apis} user={user} setUser={setUser} />} />
                 </Routes>
             </BrowserRouter>
         </div>
