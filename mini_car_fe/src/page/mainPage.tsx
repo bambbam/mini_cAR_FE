@@ -1,15 +1,35 @@
 import React from "react";
-import { Api } from "../App";
+import { useNavigate } from "react-router-dom";
+import { Api, DefaultPageProps } from "../App";
 import Header from "../component/header";
 import Square from "../component/square";
 
-interface MainPageProps {
-    api: Api;
-    user: string | null;
-    setUser: React.Dispatch<React.SetStateAction<string | null>>;
-}
+const WithUserSquars = (navigator: (path: string) => void) => {
+    return (
+        <>
+            <Square
+                bgcolor="black"
+                fntcolor="white"
+                onClick={() => {
+                    navigator("/stream");
+                }}
+            >
+                스트리밍
+            </Square>
+            <Square
+                bgcolor="black"
+                fntcolor="white"
+                onClick={() => {
+                    navigator("/gallery");
+                }}
+            >
+                갤러리
+            </Square>
+        </>
+    );
+};
 
-const MainPage = ({ api, user, setUser }: MainPageProps) => {
+const MainPage = ({ api, user, setUser }: DefaultPageProps) => {
     const mainPageFlexStyle = {
         display: "flex",
         justifyContent: "space-evenly",
@@ -17,14 +37,27 @@ const MainPage = ({ api, user, setUser }: MainPageProps) => {
         width: "100vw",
         alignItems: "center",
     };
-
+    const nav = useNavigate();
+    const navigator = (path: string) => {
+        nav(path);
+    };
     return (
         <>
             <Header user={user} />
             <div style={mainPageFlexStyle}>
-                <Square bgcolor="black" fntcolor="white">
-                    로그인이 필요합니다
-                </Square>
+                {user ? (
+                    WithUserSquars(navigator)
+                ) : (
+                    <Square
+                        bgcolor="black"
+                        fntcolor="white"
+                        onClick={() => {
+                            navigator("/login");
+                        }}
+                    >
+                        로그인이 필요합니다
+                    </Square>
+                )}
             </div>
         </>
     );

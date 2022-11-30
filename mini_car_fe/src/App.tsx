@@ -9,6 +9,7 @@ import StreamPage from "./page/streamPage";
 import CarApi from "./api/carApi";
 import UserApi from "./api/userApi";
 import LoginPage from "./page/loginPage";
+import SignupPage from "./page/signupPage";
 
 const get_apis = () => ({
     videoApi: new VideoApi(client),
@@ -16,6 +17,12 @@ const get_apis = () => ({
     userApi: new UserApi(client),
 });
 export type Api = ReturnType<typeof get_apis>;
+
+export interface DefaultPageProps {
+    api: Api;
+    user: string | null;
+    setUser: React.Dispatch<React.SetStateAction<string | null>>;
+}
 
 function App() {
     const Apis = useMemo(() => get_apis(), []);
@@ -40,6 +47,7 @@ function App() {
                     <Route path="/" element={<MainPage api={Apis} user={user} setUser={setUser} />} />
                     <Route path="/stream" element={<StreamPage api={Apis} user={user} setUser={setUser} />} />
                     <Route path="/login" element={<LoginPage api={Apis} user={user} setUser={setUser} />} />
+                    <Route path="/signup" element={<SignupPage api={Apis} user={user} setUser={setUser} />} />
                 </Routes>
             </BrowserRouter>
         </div>

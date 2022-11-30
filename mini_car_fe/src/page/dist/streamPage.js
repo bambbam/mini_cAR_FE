@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var react_1 = require("react");
+var react_router_dom_1 = require("react-router-dom");
 var carApi_1 = require("../api/carApi");
 var arrow_1 = require("../component/arrow");
 var header_1 = require("../component/header");
@@ -53,6 +54,12 @@ var StreamPage = function (_a) {
             }
         });
     }); }, []);
+    var nav = react_router_dom_1.useNavigate();
+    react_1.useEffect(function () {
+        if (!user) {
+            nav("/");
+        }
+    });
     return (react_1["default"].createElement(react_1["default"].Fragment, null,
         react_1["default"].createElement(header_1["default"], { user: user }),
         react_1["default"].createElement(streaming_1["default"], { api: api, user: user }),

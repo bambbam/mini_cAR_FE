@@ -1,21 +1,21 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Movement } from "../api/carApi";
-import { Api } from "../App";
+import { DefaultPageProps } from "../App";
 import Arrow from "../component/arrow";
 import Header from "../component/header";
 import Streaming from "../component/streaming";
 
-interface StreamingPageProps {
-    api: Api;
-    user: string | null;
-    setUser: React.Dispatch<React.SetStateAction<string | null>>;
-}
-
-const StreamPage = ({ api, user, setUser }: StreamingPageProps) => {
+const StreamPage = ({ api, user, setUser }: DefaultPageProps) => {
     const movement_func = useCallback(async (dir: Movement) => {
         await api.carApi.move(dir);
     }, []);
-
+    const nav = useNavigate();
+    useEffect(() => {
+        if (!user) {
+            nav("/");
+        }
+    });
     return (
         <>
             <Header user={user} />

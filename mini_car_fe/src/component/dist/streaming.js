@@ -27,6 +27,7 @@ var Streaming = function (_a) {
         ws.current.onclose = function (error) {
             console.log("disconnect from " + webSocketUrl);
             console.log(error);
+            setSocketConnected(false);
         };
         ws.current.onerror = function (error) {
             console.log("connection error " + webSocketUrl);
@@ -65,6 +66,9 @@ var Streaming = function (_a) {
             };
         }
     }, [socketConnected]);
+    if (!socketConnected) {
+        return react_1["default"].createElement("div", null, "\uC5F0\uACB0\uB418\uC9C0 \uC54A\uC558\uC2B5\uB2C8\uB2E4!");
+    }
     return react_1["default"].createElement("canvas", { height: 960, width: 1280, ref: canvasref });
 };
 exports["default"] = Streaming;

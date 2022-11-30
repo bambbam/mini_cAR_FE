@@ -2,19 +2,13 @@ import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setAuthorizationToken } from "../api/base";
-import { Api } from "../App";
+import { Api, DefaultPageProps } from "../App";
 
 interface ApiResult {
     login: "success" | "failure" | null;
 }
 
-interface LoginPageProp {
-    api: Api;
-    user: string | null;
-    setUser: React.Dispatch<React.SetStateAction<string | null>>;
-}
-
-const LoginPage = ({ api, setUser }: LoginPageProp) => {
+const LoginPage = ({ api, setUser, user }: DefaultPageProps) => {
     const userApi = api.userApi;
     const navigate = useNavigate();
     const [username, setUsername] = useState<string>("");
@@ -64,12 +58,15 @@ const LoginPage = ({ api, setUser }: LoginPageProp) => {
                 console.log("123");
                 const res = await userApi.read_root();
                 setUser(res.data.user);
-                navigate("/");
             }
         };
         f();
     }, [api, apiResult, navigate, setUser, userApi]);
-
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    });
     return (
         <div>
             <form onSubmit={onLogin}>

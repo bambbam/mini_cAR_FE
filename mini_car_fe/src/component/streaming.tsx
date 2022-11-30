@@ -34,6 +34,7 @@ const Streaming = ({ api, user }: StreamingProps) => {
         ws.current.onclose = (error) => {
             console.log("disconnect from " + webSocketUrl);
             console.log(error);
+            setSocketConnected(false);
         };
         ws.current.onerror = (error) => {
             console.log("connection error " + webSocketUrl);
@@ -73,7 +74,9 @@ const Streaming = ({ api, user }: StreamingProps) => {
             };
         }
     }, [socketConnected]);
-
+    if (!socketConnected) {
+        return <div>연결되지 않았습니다!</div>;
+    }
     return <canvas height={960} width={1280} ref={canvasref} />;
 };
 

@@ -34,7 +34,14 @@ const Header = (props: HeaderProps) => {
     const navigate = useNavigate();
     return (
         <nav className="navbar">
-            <div className="navbar__logo">mini-cAR</div>
+            <div
+                className="navbar__logo"
+                onClick={() => {
+                    navigate("/");
+                }}
+            >
+                mini-cAR
+            </div>
             <div>
                 {props.user == null ? (
                     <Button
