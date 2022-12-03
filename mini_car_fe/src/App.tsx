@@ -10,11 +10,16 @@ import CarApi from "./api/carApi";
 import UserApi from "./api/userApi";
 import LoginPage from "./page/loginPage";
 import SignupPage from "./page/signupPage";
+import GalleryPage from "./page/galleryPage";
+import GalleryApi from "./api/galleryApi";
+import S3Api from "./api/s3";
 
 const get_apis = () => ({
     videoApi: new VideoApi(client),
     carApi: new CarApi(client),
     userApi: new UserApi(client),
+    galleryApi: new GalleryApi(client),
+    s3Api: new S3Api("cap-mini-car"),
 });
 export type Api = ReturnType<typeof get_apis>;
 
@@ -48,6 +53,7 @@ function App() {
                     <Route path="/stream" element={<StreamPage api={Apis} user={user} setUser={setUser} />} />
                     <Route path="/login" element={<LoginPage api={Apis} user={user} setUser={setUser} />} />
                     <Route path="/signup" element={<SignupPage api={Apis} user={user} setUser={setUser} />} />
+                    <Route path="/gallery" element={<GalleryPage api={Apis} user={user} setUser={setUser} />} />
                 </Routes>
             </BrowserRouter>
         </div>

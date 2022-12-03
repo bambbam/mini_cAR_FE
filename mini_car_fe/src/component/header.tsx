@@ -25,6 +25,13 @@ const LogoutArea = ({ username }: { username: string }) => {
             >
                 stream
             </Button>
+            <Button
+                onClick={() => {
+                    navigate("/gallery");
+                }}
+            >
+                gallery
+            </Button>
             <Button onClick={logout}>logout</Button>
         </div>
     );
